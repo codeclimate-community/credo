@@ -179,8 +179,8 @@ defmodule Credo.CLI.Output do
       "You can deactivate these checks by adding this to the `checks` list in your config:\n"
     ]
 
-    UI.puts("")
-    UI.puts(msg)
+    UI.warn()
+    UI.warn(msg)
 
     skipped_checks
     |> Enum.map(&check_name/1)

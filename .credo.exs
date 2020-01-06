@@ -26,6 +26,7 @@
           "src/",
           "test/",
           "web/",
+          "dupa",
           "apps/*/lib/",
           "apps/*/src/",
           "apps/*/test/",

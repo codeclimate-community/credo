@@ -4,6 +4,39 @@ defmodule Credo.CLI.Options do
 
   The `Options` struct is stored as part of the `Execution` struct.
   """
+  @switches [
+    all_priorities: :boolean,
+    all: :boolean,
+    checks: :string,
+    config_name: :string,
+    config_file: :string,
+    color: :boolean,
+    crash_on_error: :boolean,
+    debug: :boolean,
+    mute_exit_status: :boolean,
+    format: :string,
+    help: :boolean,
+    ignore_checks: :string,
+    ignore: :string,
+    min_priority: :string,
+    only: :string,
+    read_from_stdin: :boolean,
+    strict: :boolean,
+    verbose: :boolean,
+    version: :boolean,
+    include: :keep,
+    exclude: :keep
+  ]
+  @aliases [
+    a: :all,
+    A: :all_priorities,
+    c: :checks,
+    C: :config_name,
+    d: :debug,
+    h: :help,
+    i: :ignore_checks,
+    v: :version
+  ]
 
   alias Credo.Priority
 
@@ -42,9 +75,19 @@ defmodule Credo.CLI.Options do
       command: command,
       path: path,
       args: unknown_args,
-      switches: Enum.into(switches_keywords, %{}),
+      switches: Enum.reduce(switches_keywords, %{}, &convert_switches/2),
       unknown_switches: unknown_switches_keywords ++ extra_unknown_switches
     }
+  end
+
+  defp convert_switches(switch, acc) do
+    {key, value} = switch
+
+    if old = Map.get(acc, key) do
+      Map.put(acc, key, List.wrap(old) ++ [value])
+    else
+      Map.put(acc, key, value)
+    end
   end
 
   defp patch_switches(switches_keywords) do
