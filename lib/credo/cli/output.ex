@@ -219,6 +219,6 @@ defmodule Credo.CLI.Output do
         "{#{string}, false},\n"
       ]
     end)
-    |> UI.puts()
+    |> UI.warn()
   end
 end

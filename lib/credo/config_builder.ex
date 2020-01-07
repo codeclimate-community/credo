@@ -236,7 +236,6 @@ defmodule Credo.ConfigBuilder do
             inspect(value)
           } (plugin: #{inspect(plugin_mod)}, switch: #{inspect(switch_name)})"
   end
-  defp add_switch_deprecated_switches(exec, _), do: exec
 
   defp add_switch_included(exec, %{include: include}) do
     %Execution{exec | files: %{exec.files | included: List.wrap(include)}}

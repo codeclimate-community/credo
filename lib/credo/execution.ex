@@ -28,7 +28,9 @@ defmodule Credo.Execution do
               read_from_stdin: :boolean,
               strict: :boolean,
               verbose: :boolean,
-              version: :boolean
+              version: :boolean,
+              include: :keep,
+              exclude: :keep
             ],
             cli_aliases: [
               a: :all,
